@@ -1,0 +1,9 @@
+[package]
+name = "rdb_compact"
+version = "0.1.0"
+authors = ["yubo <yubo@cryptape.com>"]
+edition = "2018"
+
+[dependencies]
+rocksdb = "0.12.0"
+clap = "2.32.0"
