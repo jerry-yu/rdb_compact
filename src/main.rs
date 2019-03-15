@@ -35,7 +35,7 @@ fn main() {
     }
 
     let mut db_opts = Options::default();
-    db_opts.create_missing_column_families(true);
+    db_opts.create_missing_column_families(false);
     db_opts.create_if_missing(false);
     db_opts.set_max_background_compactions(th);
 
