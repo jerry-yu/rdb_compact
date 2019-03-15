@@ -11,6 +11,7 @@ fn main() {
         .about("CITA Block Chain Node powered by Rust")
         .args_from_usage("-d, --data=[PATH] 'Set DB data dir'")
         .args_from_usage("-t, --thread=[NUMBER] 'Set compaction threads number'")
+        .args_from_usage("-o, --openfile=[NUMBER] 'Set max open file number'")
         .get_matches();
 
     let data_path = matches
@@ -22,6 +23,12 @@ fn main() {
         .unwrap_or("2")
         .parse::<i32>()
         .unwrap_or(2);
+
+    let fnum = matches
+        .value_of("openfile")
+        .unwrap_or("512")
+        .parse::<i32>()
+        .unwrap_or(512);
 
     let mut cfs = Vec::new();
     let mut cfname = Vec::new();
@@ -38,6 +45,7 @@ fn main() {
     db_opts.create_missing_column_families(false);
     db_opts.create_if_missing(false);
     db_opts.set_max_background_compactions(th);
+    db_opts.set_max_open_files(fnum);
 
     let db = DB::open_cf_descriptors(&db_opts, data_path, cfs).unwrap();
     for col in cfname {
