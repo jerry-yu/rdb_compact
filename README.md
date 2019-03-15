@@ -6,7 +6,7 @@ cargo build 或者 cargo build --release
 
 ## 作用
 
-打开rocksdb的数据目录，进行rocksdb的manue compaction,可以减少文件数
+打开rocksdb的数据目录，进行rocksdb的manual compaction,可以减少文件数
 
 ## 参数
 
