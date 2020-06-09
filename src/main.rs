@@ -47,11 +47,14 @@ fn main() {
     db_opts.set_max_background_compactions(th);
     db_opts.set_max_open_files(fnum);
 
+    let start: Option<String> = None;
+    let end : Option<String> = None;
+
     let db = DB::open_cf_descriptors(&db_opts, data_path, cfs).unwrap();
     for col in cfname {
         println!("compact column begin");
         let cf = db.cf_handle(&*col).expect("column not found");
-        db.compact_range_cf(cf, None, None);
+        db.compact_range_cf(cf, start.clone(),end.clone());
         println!("compact column end");
     }
     //let _ = DB::destroy(&db_opts, data_path);
